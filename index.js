@@ -55,6 +55,13 @@ async function run() {
             const blog = await allBlogsCollection.findOne(query);
             res.json(blog);
         });
+		// get a single carrier blog
+        app.get('/carrierBLogs/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const carrierBlog = await carrierBlogsCollection.findOne(query);
+            res.json(carrierBlog);
+        });
 
         // add a single blog
         app.post('/allblogs', async (req, res) => {
