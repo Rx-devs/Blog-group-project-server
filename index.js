@@ -19,9 +19,6 @@ async function run() {
         const database = client.db('Tech_blog_db');
         const usersCollection = database.collection('users');
         const allBlogsCollection = database.collection('allblogs');
-        const programmingBlogsCollection = database.collection('programmingBlogs');
-        const lifestyleBlogsCollection = database.collection('lifestyleBlogs');
-        const carrierBlogsCollection = database.collection('carrierBlogs');
 
         // Load all Blogs
         app.get('/allblogs', async (req, res) => {
@@ -29,38 +26,13 @@ async function run() {
             const allblogs = await cursor.toArray();
             res.send(allblogs);
         });
-        // Load all programmingBlogs
-        app.get('/programmingBlogs', async (req, res) => {
-            const cursor = programmingBlogsCollection.find({});
-            const programmingBlogs = await cursor.toArray();
-            res.send(programmingBlogs);
-        });
-        // Load all lifestyleBlogs
-        app.get('/lifestyleBlogs', async (req, res) => {
-            const cursor = lifestyleBlogsCollection.find({});
-            const lifestyleBlogs = await cursor.toArray();
-            res.send(lifestyleBlogs);
-        });
-        // Load all Blogs
-        app.get('/carrierBlogs', async (req, res) => {
-            const cursor = carrierBlogsCollection.find({});
-            const carrierBlogs = await cursor.toArray();
-            res.send(carrierBlogs);
-        });
-
+		
         // get a single blog
         app.get('/allblogs/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const blog = await allBlogsCollection.findOne(query);
             res.json(blog);
-        });
-		// get a single carrier blog
-        app.get('/carrierBLogs/:id', async (req, res) => {
-            const id = req.params.id;
-            const query = { _id: ObjectId(id) };
-            const carrierBlog = await carrierBlogsCollection.findOne(query);
-            res.json(carrierBlog);
         });
 
         // add a single blog
